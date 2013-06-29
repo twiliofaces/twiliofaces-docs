@@ -1,44 +1,3 @@
-== Twiliofaces - jsf tags to generate twiml
-
-
-
-== *client* - http://www.twilio.com/docs/api/twiml/client
-The Dial verb's Client noun specifies a client identifier to dial.
-
-sample code:
-----
-
-<tf:client method="POST" url="client.twiml" value="flower" />
-
-----
-
-
-[cols="1,2,1,1" options="header"]
-.client tag attributes
-|===
-|attr. name
-|attr. descr.
-|required
-|type
-
-|method
-|Allowed Values:GET or POST. Default Value:POST
-|false
-|java.lang.String
-
-|url
-|Allowed Values:any url. Default Value:none
-|false
-|java.lang.String
-
-|value
-|Example:jenny or tommy. You can wrap inside open and close tag.
-|false
-|java.lang.String
-
-
-|===
-
 
 == *conference* - http://www.twilio.com/docs/api/twiml/conference
 The Dial verb's Conference noun allows you to connect to a conference room.
@@ -110,11 +69,6 @@ sample code:
 [cols="1,2,1,1" options="header"]
 .dial tag attributes
 |===
-|attr. name
-|attr. descr.
-|required
-|type
-
 |action
 |false
 |Allowed Values:relative or absolute URL. Default Value:no default action for Dial
@@ -161,19 +115,13 @@ sample code:
 The Enqueue verb enqueues the current call in a call queue.
 
 sample code:
-
 ----
 <tf:enqueue method="POST" url="client.twiml" value="flower" />
 ----
 
-[enqueue="1,2,1,1" options="header"]
+[cols="1,2,1,1" options="header"]
 .dial tag attributes
 |===
-|attr. name
-|attr. descr.
-|required
-|type
-
 |action
 |Allowed Values:relative or absolute URL. Default Value:none
 |false
@@ -209,14 +157,9 @@ sample code:
 <tf:gather method="POST" url="client.twiml" value="flower" />
 ----
 
-[enqueue="1,2,1,1" options="header"]
+[cols="1,2,1,1" options="header"]
 .dial tag attributes
 |===
-|attr. name
-|attr. descr.
-|required
-|type
-
 |action
 |false
 |Allowed Values:relative or absolute URL. Default Value:no default action for Dial
@@ -261,14 +204,9 @@ sample code:
 <tf:jsClient />
 ----
 
-[enqueue="1,2,1,1" options="header"]
+[cols="1,2,1,1" options="header"]
 .jsClient tag attributes
 |===
-|attr. name
-|attr. descr.
-|required
-|type
-
 |token
 |true
 |Initialize Twilio.Device with a capability token
@@ -312,14 +250,9 @@ sample code:
 <tf:jsClient />
 ----
 
-[enqueue="1,2,1,1" options="header"]
+[cols="1,2,1,1" options="header"]
 .jsClient tag attributes
 |===
-|attr. name
-|attr. descr.
-|required
-|type
-
 |sendDigits
 |Allowed Values:any digits. Default Value:none. If you want to wait before sending the extension, so you add a few leading 'w' characters. Each 'w' character tells Twilio to wait 0.5 seconds instead of playing a digit.
 |false
@@ -350,14 +283,10 @@ sample code:
 <tf:pause />
 ----
 
-[enqueue="1,2,1,1" options="header"]
+[cols="1,2,1,1" options="header"]
 .pause tag attributes
 |===
-|attr. name
-|attr. descr.
-|required
-|type
-
+|===
 |length
 |false
 |Allowed Values:integer &#60; 0. Default Value:1 second
@@ -373,14 +302,9 @@ sample code:
 <tf:play />
 ----
 
-[enqueue="1,2,1,1" options="header"]
+[cols="1,2,1,1" options="header"]
 .play tag attributes
 |===
-|attr. name
-|attr. descr.
-|required
-|type
-
 |loop
 |Allowed Values:integer &#60;&#61; 0. Default Value:1
 |false
@@ -401,14 +325,9 @@ sample code:
 <tf:queue />
 ----
 
-[enqueue="1,2,1,1" options="header"]
+[cols="1,2,1,1" options="header"]
 .queue tag attributes
 |===
-|attr. name
-|attr. descr.
-|required
-|type
-
 |url
 |Allowed Values:relative or absolute URL. Default Value:none
 |false
@@ -434,14 +353,9 @@ sample code:
 <tf:record />
 ----
 
-[enqueue="1,2,1,1" options="header"]
+[cols="1,2,1,1" options="header"]
 .record tag attributes
 |===
-|attr. name
-|attr. descr.
-|required
-|type
-
 |action
 |false
 |Allowed Values:relative or absolute URL. Default Value:current document URL
@@ -487,14 +401,9 @@ sample code:
 <tf:redirect />
 ----
 
-[enqueue="1,2,1,1" options="header"]
+[cols="1,2,1,1" options="header"]
 .redirect tag attributes
 |===
-|attr. name
-|attr. descr.
-|required
-|type
-
 |method
 |false
 |Allowed Values:GET, POST. Default Value:POST
@@ -515,14 +424,9 @@ sample code:
 <tf:reject />
 ----
 
-[enqueue="1,2,1,1" options="header"]
+[cols="1,2,1,1" options="header"]
 .reject tag attributes
 |===
-|attr. name
-|attr. descr.
-|required
-|type
-
 |reason
 |false
 |Allowed Values:rejected, busy. Default Value:rejected
@@ -546,14 +450,9 @@ sample code:
 <tf:say />
 ----
 
-[enqueue="1,2,1,1" options="header"]
+[cols="1,2,1,1" options="header"]
 .say tag attributes
 |===
-|attr. name
-|attr. descr.
-|required
-|type
-
 |voice
 |Allowed Values:man, woman. Default Value:man
 |false
@@ -584,14 +483,9 @@ sample code:
 <tf:sip />
 ----
 
-[enqueue="1,2,1,1" options="header"]
+[cols="1,2,1,1" options="header"]
 .sip tag attributes
 |===
-|attr. name
-|attr. descr.
-|required
-|type
-
 |url
 |Allowed Values:call screening url. Default Value:none.
 |false
@@ -622,14 +516,9 @@ sample code:
 <tf:sms />
 ----
 
-[enqueue="1,2,1,1" options="header"]
+[cols="1,2,1,1" options="header"]
 .sms tag attributes
 |===
-|attr. name
-|attr. descr.
-|required
-|type
-
 |to
 |Allowed Values:phone number.
 |false
@@ -661,4 +550,3 @@ sample code:
 |java.lang.String
 
 |===
-
