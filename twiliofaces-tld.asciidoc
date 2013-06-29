@@ -1,19 +1,25 @@
-[cols="2,3,5a", options="header"]
+== Twiliofaces - jsf tags to generate twiml
+
+
+
+
+
+
+[cols="1,1,2,2" options="header"]
+.JSF tags
 |===
-|Name |Group |Description
+|Name
+|Attributes
+|Description
 
-|Firefox
-|Web Browser
+|client
+|Browser
 |Mozilla Firefox is an open-source web browser.
-It's designed for:
+It's designed for standards compliance,
+performance, portability.
 
-* standards compliance,
-* performance and
-* portability.
-
-|Ruby
-|Programming Language
-|A programmer's best friend.
-
-...
+|Arquillian
+|Testing
+|An innovative and highly extensible testing platform.
+Empowers developers to easily create real, automated tests.
 |===
