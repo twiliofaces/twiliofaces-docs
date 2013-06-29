@@ -38,3 +38,557 @@ sample code:
 
 
 |===
+
+
+== *conference* - http://www.twilio.com/docs/api/twiml/conference
+The Dial verb's Conference noun allows you to connect to a conference room.
+
+sample code:
+----
+<tf:client method="POST" url="client.twiml" value="flower" />
+----
+
+[cols="1,2,1,1" options="header"]
+.client tag attributes
+|===
+|attr. name
+|attr. descr.
+|required
+|type
+
+|muted
+|Allowed Values:true,false. Default Value:false
+|false
+|java.lang.String
+
+|beep
+|Allowed Values:true, false. Default Value:true
+|false
+|java.lang.String
+
+|startConferenceOnEnter
+|Allowed Values:true, false. Default Value:true
+|false
+|java.lang.String
+
+|endConferenceOnExit
+|Allowed Values:true, false. Default Value:false
+|false
+|java.lang.String
+
+|waitUrl
+|Allowed Values:TwiML url, empty string. Default Value:default Twilio hold music
+|false
+|java.lang.String
+
+|waitMethod
+|Allowed Values:GET or POST. Default Value:POST
+|false
+|java.lang.String
+
+|maxParticipants
+|Allowed Values:positive integer &#60;&#61; 40. Default Value:40
+|false
+|java.lang.String
+
+|value
+|Example:moderated-conference-room or Room 1234. You can wrap inside open and close tag.
+|false
+|java.lang.String
+
+|===
+
+
+== *dial* - http://www.twilio.com/docs/api/twiml/dial
+The Dial verb connects the current caller to another phone.
+
+sample code:
+----
+<tf:client method="POST" url="client.twiml" value="flower" />
+----
+
+[cols="1,2,1,1" options="header"]
+.dial tag attributes
+|===
+|action
+|false
+|Allowed Values:relative or absolute URL. Default Value:no default action for Dial
+|java.lang.String
+
+|method
+|Allowed Values:GET, POST. Default Value:POST
+|false
+|java.lang.String
+
+|timeout
+|Allowed Values:positive integer. Default Value:30 seconds
+|false
+|java.lang.String
+
+|hangupOnStar
+|Allowed Values:true, false. Default Value:false
+|false
+|java.lang.String
+
+|timeLimit
+|Allowed Values:positive integer (seconds). Default Value:14400 seconds (4 hours)
+|false
+|java.lang.String
+
+|callerId
+|Allowed Values:a valid phone number, or client identifier if you are dialing a Client. Default Value:Caller's callerId
+|false
+|java.lang.String
+
+|record
+|Allowed Values:true, false. Default Value:false
+|false
+|java.lang.String
+
+|value
+|Example: 415-123-4567. You can wrap inside open and close tag.
+|false
+|java.lang.String
+
+|===
+
+== *enqueue* - http://www.twilio.com/docs/api/twiml/enqueue
+The Enqueue verb enqueues the current call in a call queue.
+
+sample code:
+----
+<tf:enqueue method="POST" url="client.twiml" value="flower" />
+----
+
+[enqueue="1,2,1,1" options="header"]
+.dial tag attributes
+|===
+|action
+|Allowed Values:relative or absolute URL. Default Value:none
+|false
+|java.lang.String
+
+|method
+|Allowed Values:GET, POST. Default Value:POST
+|false
+|java.lang.String
+
+|waitUrl
+|Allowed Values:relative or absolute URL. Default Value:http://s3.amazonaws.com/com.twilio.sounds.music/index.xml.
+|false
+|java.lang.String
+
+|waitUrlMethod
+|Allowed Values:GET, POST. Default Value:POST
+|false
+|java.lang.String
+
+|value
+|Example:support. You can wrap inside open and close tag.
+|true
+|java.lang.String
+
+|===
+
+== *gather* - http://www.twilio.com/docs/api/twiml/gather
+The Gather verb collects digits that a caller enters into his or her telephone keypad.
+
+sample code:
+----
+<tf:gather method="POST" url="client.twiml" value="flower" />
+----
+
+[enqueue="1,2,1,1" options="header"]
+.dial tag attributes
+|===
+|action
+|false
+|Allowed Values:relative or absolute URL. Default Value:no default action for Dial
+|java.lang.String
+
+|method
+|Allowed Values:GET, POST. Default Value:POST
+|false
+|java.lang.String
+
+|timeout
+|Allowed Values:positive integer. Default Value:30 seconds
+|false
+|java.lang.String
+
+|finishOnKey
+|Allowed Values:any digit,#,*. Default Value:#
+|false
+|java.lang.String
+
+|numDigits
+|Allowed Values: integer &#60;&#61; 1. Default Value:unlimited
+|false
+|java.lang.String
+
+|===
+
+== *hangup* - http://www.twilio.com/docs/api/twiml/hangup
+The Hangup verb ends a call.
+
+sample code:
+----
+<tf:hangup />
+----
+
+
+== *jsClient* - http://www.twilio.com/docs/client/twilio-js
+Twilio.js allows you to establish audio connections between a web browser and a Twilio Application.
+
+sample code:
+----
+<tf:jsClient />
+----
+
+[enqueue="1,2,1,1" options="header"]
+.jsClient tag attributes
+|===
+|token
+|true
+|Initialize Twilio.Device with a capability token
+|java.lang.String
+
+|debug
+|Allowed Values:true, false. Default Value:false
+|false
+|java.lang.String
+
+|rtc
+|Allowed Values:true, false. Default Value:false
+|false
+|java.lang.String
+
+|params
+|The optional params argument is a JavaScript object where configuration settings can be passed in to .setup. Use the format: key1:value1,key2:value2..
+|false
+|java.lang.String
+
+|withoutJs
+|Use withoutJs attribute for not writing twilio.js and jquery.js. Allowed Values:true, false. Default Value:false
+|false
+|java.lang.String
+
+|===
+
+== *leave* - http://www.twilio.com/docs/api/twiml/leave
+The Leave verb transfers control of a call that is in a queue so that the caller exits the queue and execution continues with the next verb after the original Enqueue
+
+sample code:
+----
+<tf:leave />
+----
+
+== *number* - http://www.twilio.com/docs/api/twiml/number
+The Dial verb's Number noun specifies a phone number to dial. 
+
+sample code:
+----
+<tf:jsClient />
+----
+
+[enqueue="1,2,1,1" options="header"]
+.jsClient tag attributes
+|===
+|sendDigits
+|Allowed Values:any digits. Default Value:none. If you want to wait before sending the extension, so you add a few leading 'w' characters. Each 'w' character tells Twilio to wait 0.5 seconds instead of playing a digit.
+|false
+|java.lang.String
+
+|url
+|Allowed Values:any url. Default Value:none
+|false
+|java.lang.String
+
+|method
+|Allowed Values:GET or POST. Default Value:POST
+|false
+|java.lang.String
+
+|value
+|Example:415-123-4567. You can wrap inside open and close tag.
+|true
+|java.lang.String
+
+|===
+
+== *pause* - http://www.twilio.com/docs/api/twiml/pause
+The Pause verb waits silently for a specific number of seconds. 
+
+sample code:
+----
+<tf:pause />
+----
+
+[enqueue="1,2,1,1" options="header"]
+.pause tag attributes
+|===
+|===
+|length
+|false
+|Allowed Values:integer &#60; 0. Default Value:1 second
+|java.lang.String
+
+|===
+
+== *play* - http://www.twilio.com/docs/api/twiml/play
+The Play verb plays an audio file back to the caller. Twilio retrieves the file from a URL that you provide.
+
+sample code:
+----
+<tf:play />
+----
+
+[enqueue="1,2,1,1" options="header"]
+.play tag attributes
+|===
+|loop
+|Allowed Values:integer &#60;&#61; 0. Default Value:1
+|false
+|java.lang.String
+
+|value
+|Example:https://api.twilio.com/cowbell.mp3. You can wrap inside open and close tag.
+|true
+|java.lang.String
+
+|===
+
+== *queue* - http://www.twilio.com/docs/api/twiml/queue
+The Dial verb's Queue noun specifies a queue to dial.
+
+sample code:
+----
+<tf:queue />
+----
+
+[enqueue="1,2,1,1" options="header"]
+.queue tag attributes
+|===
+|url
+|Allowed Values:relative or absolute URL. Default Value:none
+|false
+|java.lang.String
+
+|method
+|Allowed Values:GET, POST. Default Value:POST
+|false
+|java.lang.String
+
+|value
+|Example:support. You can wrap inside open and close tag.
+|true
+|java.lang.String
+
+|===
+
+== *record* - http://www.twilio.com/docs/api/twiml/record
+The Record verb records the caller's voice and returns to you the URL of a file containing the audio recording.
+
+sample code:
+----
+<tf:record />
+----
+
+[enqueue="1,2,1,1" options="header"]
+.record tag attributes
+|===
+|action
+|false
+|Allowed Values:relative or absolute URL. Default Value:current document URL
+|java.lang.String
+
+|method
+|Allowed Values:GET, POST. Default Value:POST
+|false
+|java.lang.String
+
+|timeout
+|Allowed Values:positive integer. Default Value:5 seconds
+|false
+|java.lang.String
+
+|finishOnKey
+|Allowed Values:any digit,#,*. Default Value:1234567890*#
+|false
+|java.lang.String
+
+|maxLength
+|Allowed Values:integer &#60; 1. Default Value:3600 (1 hour)
+|false
+|java.lang.String
+
+|transcribe
+|Allowed Values:relative or absolute URL. Default Value:none
+|false
+|java.lang.String
+
+|playBeep
+|Allowed Values:true, false. Default Value:true
+|false
+|java.lang.String
+
+|===
+
+== *redirect* - http://www.twilio.com/docs/api/twiml/redirect
+The Redirect verb transfers control of a call to the TwiML at a different URL.
+
+sample code:
+----
+<tf:redirect />
+----
+
+[enqueue="1,2,1,1" options="header"]
+.redirect tag attributes
+|===
+|method
+|false
+|Allowed Values:GET, POST. Default Value:POST
+|java.lang.String
+
+|value
+|Example:http://pigeons.com/twiml.xml. You can wrap inside open and close tag.
+|true
+|java.lang.String
+
+|===
+
+== *reject* - http://www.twilio.com/docs/api/twiml/reject
+The Reject verb rejects an incoming call to your Twilio number without billing you.
+
+sample code:
+----
+<tf:reject />
+----
+
+[enqueue="1,2,1,1" options="header"]
+.reject tag attributes
+|===
+|reason
+|false
+|Allowed Values:rejected, busy. Default Value:rejected
+|java.lang.String
+
+|===
+
+== *response* - http://www.twilio.com/docs/api/twiml/response
+The root element of Twilio's XML Markup is the Response element.
+
+sample code:
+----
+<tf:response />
+----
+
+== *say* - http://www.twilio.com/docs/api/twiml/say
+The Say verb converts text to speech that is read back to the caller. Say is useful for development or saying dynamic text that is difficult to pre-record.
+
+sample code:
+----
+<tf:say />
+----
+
+[enqueue="1,2,1,1" options="header"]
+.say tag attributes
+|===
+|voice
+|Allowed Values:man, woman. Default Value:man
+|false
+|java.lang.String
+
+|language
+|Allowed Values:en, en-gb, es, fr, de, it. Default Value:en
+|false
+|java.lang.String
+
+|loop
+|Allowed Values:integer &#60;&#61; 0. Default Value:1
+|false
+|java.lang.String
+
+|value
+|Example:Chapeau! You can wrap inside open and close tag.
+|true
+|java.lang.String
+
+|===
+
+== *sip* - http://www.twilio.com/docs/api/twiml/say
+The Dial verb's Sip noun lets you set up VoIP sessions by using SIP - Session Initiation Protocol.
+
+sample code:
+----
+<tf:sip />
+----
+
+[enqueue="1,2,1,1" options="header"]
+.sip tag attributes
+|===
+|url
+|Allowed Values:call screening url. Default Value:none.
+|false
+|java.lang.String
+
+|method
+|Allowed Values:GET, POST. Default Value:POST
+|false
+|java.lang.String
+
+|username
+|Username for SIP authentication
+|false
+|java.lang.String
+
+|passowrd
+|Password for SIP authentication.
+|true
+|java.lang.String
+
+|===
+
+== *sms* - http://www.twilio.com/docs/api/twiml/sms
+The Sms verb sends an SMS message to a phone number during a phone call.
+
+sample code:
+----
+<tf:sms />
+----
+
+[enqueue="1,2,1,1" options="header"]
+.sms tag attributes
+|===
+|to
+|Allowed Values:phone number.
+|false
+|java.lang.String
+
+|from
+|Allowed Values:phone number.
+|false
+|java.lang.String
+
+|action
+|Allowed Values:relative or absolute URL. Default Value:none.
+|false
+|java.lang.String
+
+|method
+|Allowed Values:GET, POST. Default Value:POST
+|false
+|java.lang.String
+
+|statusCallback
+|Allowed Values:relative or absolute URL. Default Value:none
+|false
+|java.lang.String
+
+|value
+|Example:The king stay the king. You can wrap inside open and close tag.
+|true
+|java.lang.String
+
+|===
+
