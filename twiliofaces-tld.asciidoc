@@ -1,0 +1,16 @@
+[options="header"]
+|===
+|Name |Group |Description
+
+|Firefox
+|Web Browser
+|Mozilla Firefox is an open-source web browser.
+It's designed for standards compliance,
+performance, portability.
+
+|Ruby
+|Programming Language
+|A programmer's best friend.
+
+...
+|===
