@@ -1,5 +1,8 @@
 = all twiliofaces inject annotations
 
+Twilio makes HTTP requests to your application just like a regular web browser. By including parameters and values in its requests, Twilio sends data to your application that you can act upon before responding. 
+You can configure the URLs and HTTP Methods Twilio uses to make its requests via the account portal or using 
+the REST API.
 You can inject all twilio request params, in your CDI beans:
 
 ----
@@ -13,6 +16,10 @@ public SimpleController {
 }
 
 ----
+
+For more information about single param, read:
+http://www.twilio.com/docs/api/twiml/twilio_request
+
 
 == configuration
 
