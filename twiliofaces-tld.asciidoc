@@ -110,6 +110,11 @@ sample code:
 [cols="1,2,1,1" options="header"]
 .dial tag attributes
 |===
+|attr. name
+|attr. descr.
+|required
+|type
+
 |action
 |false
 |Allowed Values:relative or absolute URL. Default Value:no default action for Dial
@@ -156,6 +161,7 @@ sample code:
 The Enqueue verb enqueues the current call in a call queue.
 
 sample code:
+
 ----
 <tf:enqueue method="POST" url="client.twiml" value="flower" />
 ----
@@ -163,6 +169,11 @@ sample code:
 [enqueue="1,2,1,1" options="header"]
 .dial tag attributes
 |===
+|attr. name
+|attr. descr.
+|required
+|type
+
 |action
 |Allowed Values:relative or absolute URL. Default Value:none
 |false
@@ -201,6 +212,11 @@ sample code:
 [enqueue="1,2,1,1" options="header"]
 .dial tag attributes
 |===
+|attr. name
+|attr. descr.
+|required
+|type
+
 |action
 |false
 |Allowed Values:relative or absolute URL. Default Value:no default action for Dial
@@ -248,6 +264,11 @@ sample code:
 [enqueue="1,2,1,1" options="header"]
 .jsClient tag attributes
 |===
+|attr. name
+|attr. descr.
+|required
+|type
+
 |token
 |true
 |Initialize Twilio.Device with a capability token
@@ -294,6 +315,11 @@ sample code:
 [enqueue="1,2,1,1" options="header"]
 .jsClient tag attributes
 |===
+|attr. name
+|attr. descr.
+|required
+|type
+
 |sendDigits
 |Allowed Values:any digits. Default Value:none. If you want to wait before sending the extension, so you add a few leading 'w' characters. Each 'w' character tells Twilio to wait 0.5 seconds instead of playing a digit.
 |false
@@ -327,7 +353,11 @@ sample code:
 [enqueue="1,2,1,1" options="header"]
 .pause tag attributes
 |===
-|===
+|attr. name
+|attr. descr.
+|required
+|type
+
 |length
 |false
 |Allowed Values:integer &#60; 0. Default Value:1 second
@@ -346,6 +376,11 @@ sample code:
 [enqueue="1,2,1,1" options="header"]
 .play tag attributes
 |===
+|attr. name
+|attr. descr.
+|required
+|type
+
 |loop
 |Allowed Values:integer &#60;&#61; 0. Default Value:1
 |false
@@ -369,6 +404,11 @@ sample code:
 [enqueue="1,2,1,1" options="header"]
 .queue tag attributes
 |===
+|attr. name
+|attr. descr.
+|required
+|type
+
 |url
 |Allowed Values:relative or absolute URL. Default Value:none
 |false
@@ -397,6 +437,11 @@ sample code:
 [enqueue="1,2,1,1" options="header"]
 .record tag attributes
 |===
+|attr. name
+|attr. descr.
+|required
+|type
+
 |action
 |false
 |Allowed Values:relative or absolute URL. Default Value:current document URL
@@ -445,6 +490,11 @@ sample code:
 [enqueue="1,2,1,1" options="header"]
 .redirect tag attributes
 |===
+|attr. name
+|attr. descr.
+|required
+|type
+
 |method
 |false
 |Allowed Values:GET, POST. Default Value:POST
@@ -468,6 +518,11 @@ sample code:
 [enqueue="1,2,1,1" options="header"]
 .reject tag attributes
 |===
+|attr. name
+|attr. descr.
+|required
+|type
+
 |reason
 |false
 |Allowed Values:rejected, busy. Default Value:rejected
@@ -494,6 +549,11 @@ sample code:
 [enqueue="1,2,1,1" options="header"]
 .say tag attributes
 |===
+|attr. name
+|attr. descr.
+|required
+|type
+
 |voice
 |Allowed Values:man, woman. Default Value:man
 |false
@@ -527,6 +587,11 @@ sample code:
 [enqueue="1,2,1,1" options="header"]
 .sip tag attributes
 |===
+|attr. name
+|attr. descr.
+|required
+|type
+
 |url
 |Allowed Values:call screening url. Default Value:none.
 |false
@@ -560,6 +625,11 @@ sample code:
 [enqueue="1,2,1,1" options="header"]
 .sms tag attributes
 |===
+|attr. name
+|attr. descr.
+|required
+|type
+
 |to
 |Allowed Values:phone number.
 |false
