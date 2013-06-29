@@ -16,7 +16,7 @@
 |type
 
 
-|client
+|*client*
 |The Dial verb's Client noun specifies a client identifier to dial.
 |
 |
