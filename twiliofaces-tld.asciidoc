@@ -2,9 +2,15 @@
 
 
 
-== *client*
+== *client* - http://www.twilio.com/docs/api/twiml/client
 The Dial verb's Client noun specifies a client identifier to dial.
 
+sample code:
+----
+
+<tf:client method="POST" url="client.twiml" value="flower" />
+
+----
 
 
 [cols="1,2,1,1" options="header"]
