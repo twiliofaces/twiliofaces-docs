@@ -1,12 +1,15 @@
-[options="header"]
+[cols="2,3,5a", options="header"]
 |===
 |Name |Group |Description
 
 |Firefox
 |Web Browser
 |Mozilla Firefox is an open-source web browser.
-It's designed for standards compliance,
-performance, portability.
+It's designed for:
+
+* standards compliance,
+* performance and
+* portability.
 
 |Ruby
 |Programming Language
