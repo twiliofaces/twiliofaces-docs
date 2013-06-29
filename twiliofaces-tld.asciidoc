@@ -5,21 +5,44 @@
 
 
 
-[cols="1,1,2,2" options="header"]
+[cols="1,2,1,2,1,1" options="header"]
 .JSF tags
 |===
-|Name
-|Attributes
-|Description
+|tag
+|description
+|attr. name
+|attr. descr.
+|required
+|type
+
 
 |client
-|Browser
-|Mozilla Firefox is an open-source web browser.
-It's designed for standards compliance,
-performance, portability.
+|The Dial verb's Client noun specifies a client identifier to dial.
+|
+|
+|
+|
 
-|Arquillian
-|Testing
-|An innovative and highly extensible testing platform.
-Empowers developers to easily create real, automated tests.
+|
+|
+|method
+|Allowed Values:GET or POST. Default Value:POST
+|false
+|java.lang.String
+
+|
+|
+|url
+|Allowed Values:any url. Default Value:none
+|false
+|java.lang.String
+
+|
+|
+|value
+|Example:jenny or tommy. You can wrap inside open and close tag.
+|false
+|java.lang.String
+
+
 |===
