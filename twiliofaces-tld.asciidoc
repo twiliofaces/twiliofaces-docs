@@ -2,43 +2,29 @@
 
 
 
+== *client*
+The Dial verb's Client noun specifies a client identifier to dial.
 
 
 
-[cols="1,2,1,2,1,1" options="header"]
-.JSF tags
+[cols="1,2,1,1" options="header"]
+.client tag attributes
 |===
-|tag
-|description
 |attr. name
 |attr. descr.
 |required
 |type
 
-
-|*client*
-|The Dial verb's Client noun specifies a client identifier to dial.
-|
-|
-|
-|
-
-|
-|
 |method
 |Allowed Values:GET or POST. Default Value:POST
 |false
 |java.lang.String
 
-|
-|
 |url
 |Allowed Values:any url. Default Value:none
 |false
 |java.lang.String
 
-|
-|
 |value
 |Example:jenny or tommy. You can wrap inside open and close tag.
 |false
