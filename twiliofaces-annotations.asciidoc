@@ -1,55 +1,57 @@
-configuration
+= all twiliofaces inject annotations
 
-ApiVersion  
-ApplicationSid	
-TwilioClientToken	
-TwilioNumber		
-TwilioSid		
-TwilioToken
+== configuration
+
+. ApiVersion	
+. ApplicationSid	
+. TwilioClientToken	
+. TwilioNumber		
+. TwilioSid		
+. TwilioToken
 
 
-notification
+== notification
 		
-AccountSid		
-CallSid		
-CallStatus		
-CallerName		
-Digits		
-Direction		
-ForwardedFrom		
-From		
-FromCity		
-FromCountry		
-FromState		
-FromZip		
-RecordingDuration		
-RecordingSid		
-RecordingUrl		
-SmsStatus		
-To		
-ToCity		
-ToCountry		
-ToState		
-ToZip		
-TranscriptionSid		
-TranscriptionStatus		
-TranscriptionText		
-TranscriptionUrl		
-TwilioSignature
+. AccountSid		
+. CallSid		
+. CallStatus		
+. CallerName		
+. Digits		
+. Direction		
+. ForwardedFrom		
+. From		
+. FromCity		
+. FromCountry		
+. FromState		
+. FromZip		
+. RecordingDuration		
+. RecordingSid		
+. RecordingUrl		
+. SmsStatus		
+. To		
+. ToCity		
+. ToCountry		
+. ToState		
+. ToZip		
+. TranscriptionSid		
+. TranscriptionStatus		
+. TranscriptionText		
+. TranscriptionUrl		
+. TwilioSignature
 
+== scope
 
-scope
+. TwilioScope
 
-TwilioScope
+== sip
 
-sip
+. DialSipCallId		
+. DialSipHeader		
+. DialSipHeader_		
+. DialSipResponseCode		
+. SipCallId		
+. SipHeader
 
-DialSipCallId		
-DialSipHeader		
-DialSipHeader_		
-DialSipResponseCode		
-SipCallId		
-SipHeader
+== all request vars
 
-
-TwilioRequestParams
+. TwilioRequestParams
