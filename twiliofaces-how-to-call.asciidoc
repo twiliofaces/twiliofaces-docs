@@ -1,19 +1,90 @@
 == how to call someone from java code
 
-some example about use TwilioCaller:
+Some code about how to use TwilioCaller inside java classes.
+
+Add to your WEB-INF/web.xml, some context params:
 
 ----
 
-try {
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>/index.htm</welcome-file>
+	</welcome-file-list>
+
+	<context-param>
+		<param-name>TWILIO_SID</param-name>
+		<param-value>xxxxxxxx</param-value>
+	</context-param>
+
+
+	<context-param>
+		<param-name>TWILIO_TOKEN</param-name>
+		<param-value>xxxxx</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>TWILIO_NUMBER</param-name>
+		<param-value>xxxxx</param-value>
+	</context-param>
+
+</web-app>
+
+----
+
+And inside the class where you want call some number:
+
+----
+
+@Inject
+TwilioCaller twilioCaller;
+	
+	
+....
+
+public void call(String accountSid, String twilioToken, String from, String to, String url) {
+
+	try {
   		String callId = twilioCaller
-					.setAccountSid(callToMake.getAccountSid())
-					.setAuthToken(callToMake.getTwilioToken())
-					.setFrom(callToMake.getFrom()).setTo(callToMake.getTo())
-					.setEndpoint(callToMake.getUrl()).call();
+					.setAccountSid(accountSid)
+					.setAuthToken(twilioToken)
+					.setFrom(from).setTo(to)
+					.setEndpoint(url).call();
 			System.out.println("call id: " + callId);
-		} catch (TwilioRestException e) {
+	} catch (TwilioRestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+	}
+		
+		
+}
+
+----
+
+
+and the twiml page should be like: 
+
+----
+
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:tf="http://twiliofaces.org/twiliofaces">
+	<tf:response>
+		<tf:say voice="woman" language="it">Hello!</tf:say>
+	</tf:response>
+</f:view>
 
 ----
