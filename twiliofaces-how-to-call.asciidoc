@@ -46,13 +46,36 @@ Add to your WEB-INF/web.xml, some context params:
 
 And inside the class where you want call some number:
 
+- Inject TwilioCaller
 ----
 
 @Inject
 TwilioCaller twilioCaller;
 	
-	
-....
+----
+
+- If you are in the web context (where your app can see the context parameters):
+
+----
+
+public void directCall(String to, String url) {
+
+	try {
+  		String callId = twilioCaller.setTo(to).setEndpoint(url).call();
+		System.out.println("call id: " + callId);
+	} catch (TwilioRestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+	}
+		
+		
+}
+
+----
+
+- If you are in ejb context (without interactions with web level - like ejb3 timers):
+
+----
 
 public void call(String accountSid, String twilioToken, String from, String to, String url) {
 
@@ -62,7 +85,7 @@ public void call(String accountSid, String twilioToken, String from, String to, 
 					.setAuthToken(twilioToken)
 					.setFrom(from).setTo(to)
 					.setEndpoint(url).call();
-			System.out.println("call id: " + callId);
+		System.out.println("call id: " + callId);
 	} catch (TwilioRestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
