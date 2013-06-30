@@ -1,1 +1,201 @@
-how to use twilio in your browser with jsclient
+== how to use twilio in your browser with jsclient
+
+A java CDI controller where we will create js token, using the logged user:
+
+----
+
+import java.io.Serializable;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.twiliofaces.annotations.configuration.TwilioClientToken;
+import org.twiliofaces.annotations.configuration.TwilioNumber;
+
+@SessionScoped
+@Named
+public class TwilioJsController implements Serializable
+{
+
+   private static final long serialVersionUID = 1L;
+
+   @Inject
+   @TwilioClientToken(client = "#{loginController.userRegistration.lastName}")
+   String jsToken;
+
+   @Inject
+   @TwilioNumber
+   String twilioNumber;
+
+   public TwilioJsController()
+   {
+   }
+
+   public String getJsToken()
+   {
+      return jsToken;
+   }
+
+   public String getTwilioNumber()
+   {
+      return twilioNumber;
+   }
+
+}
+
+----
+
+
+
+Below the jsf page where we use js twilio client:
+
+----
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:tf="http://twiliofaces.org/twiliofaces" lang="en">
+
+<h:head>
+	<title>Twilio Client Call</title>
+	<tf:jsClient token="#{twilioJsController.jsToken}" debug="true"
+		rtc="true">
+		<f:facet name="ready">
+		 	 $("#log").text("Client 'twiliofaces' is ready");
+		</f:facet>
+		<f:facet name="offline">
+		 $('#status').text('Offline');
+		</f:facet>
+		<f:facet name="incoming">
+			 $("#log").text("Incoming connection from " + incoming.parameters.From);
+       		// accept the incoming connection and start two-way audio
+       		if (confirm('Accept incoming call from ' + incoming.parameters.From + '?')){ 
+					incoming.accept();
+			} 
+		</f:facet>
+		<f:facet name="cancel"></f:facet>
+		<f:facet name="connect">
+		 	$("#log").text("Successfully established call");
+		</f:facet>
+		<f:facet name="disconnect">
+		 	$("#log").text("Call ended");
+		</f:facet>
+		<f:facet name="presence">
+				 if (presence.available) {
+          			// create an item for the client that became available
+         		 	$("<li />", {id: presence.from, text: presence.from}).click(function () { $("#number").val(presence.from); callNumber();
+					}).prependTo("#people"); 
+				} 
+				else { 
+					// find the item by client name and remove it 
+					$("#" + presence.from).remove(); 
+				}
+		</f:facet>
+		<f:facet name="error">
+			$("#log").text("Error: " + error.message);
+		</f:facet>
+		<f:facet name="javascript">
+      	
+      	function callNumber() {
+	        // get the phone number or client to connect the call to
+	        // This will get passed through to the Voice URL
+	        // (http://example.com/path-to-servlet/voice). That URL will
+	        // Dial the correct number
+	         params = {"PhoneNumber": $("#number").val()};
+	        Twilio.Device.connect(params);
+      	}
+  
+      	function hangup() {
+        	Twilio.Device.disconnectAll();
+      	}
+    	</f:facet>
+	</tf:jsClient>
+</h:head>
+<h:body>
+	welcome #{loginController.userRegistration.fullName}<br/>
+	<button class="call" onclick="callNumber();">Call</button>
+
+	<button class="hangup" onclick="hangup();">Hangup</button>
+
+	<input type="text" id="number" name="number"
+		placeholder="Enter a phone number to call" />
+
+	<div id="log">...</div>
+	<br />
+	<ul id="people" />
+	<br />
+	<a href="../logout.jsp">logout</a>
+</h:body>
+</html>
+
+----
+
+the twiml page used configured in our twilio account dashboard:
+
+----
+
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+  xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:tf="http://twiliofaces.org/twiliofaces">
+	<f:event type="preRenderView" listener="#{logController.log}" />
+	<tf:response>
+		<tf:dial callerId="#{param.From}"
+			rendered="#{not twimlClientController.isClient()}">
+			<tf:client value="#{param.PhoneNumber}"></tf:client>
+		</tf:dial>
+
+		<tf:dial callerId="#{twimlClientController.twilioNumber}"
+			rendered="#{twimlClientController.isClient()}">
+			<tf:number value="#{param.PhoneNumber}"></tf:number>
+		</tf:dial>
+	</tf:response>
+</f:view>
+
+----
+
+We use a CDI controller to understand if we have a number or client alias:
+
+----
+
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.twiliofaces.annotations.configuration.TwilioNumber;
+import org.twiliofaces.annotations.notification.PhoneNumber;
+
+@Named
+@RequestScoped
+public class TwimlClientController
+{
+
+   @Inject
+   @TwilioNumber
+   String twilioNumber;
+
+   @Inject
+   @PhoneNumber
+   String phoneNumber;
+
+   public String getTwilioNumber()
+   {
+      return twilioNumber;
+   }
+
+   public boolean isClient()
+   {
+      return isNumeric(phoneNumber);
+   }
+
+   public static boolean isNumeric(String str)
+   {
+      return str.matches("[+-]?\\d*(\\.\\d+)?");
+   }
+
+}
+
+----
