@@ -1,0 +1,19 @@
+== how to call someone from java code
+
+some example about use TwilioCaller:
+
+----
+
+try {
+  		String callId = twilioCaller
+					.setAccountSid(callToMake.getAccountSid())
+					.setAuthToken(callToMake.getTwilioToken())
+					.setFrom(callToMake.getFrom()).setTo(callToMake.getTo())
+					.setEndpoint(callToMake.getUrl()).call();
+			System.out.println("call id: " + callId);
+		} catch (TwilioRestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+----
