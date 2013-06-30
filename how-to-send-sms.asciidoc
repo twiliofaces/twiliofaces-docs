@@ -61,12 +61,10 @@ TwilioSmsSender TwilioSmsSender;
 public void directSmsSend(String to, String url) {
 
 	try {
-  		String smsId = twilioSmsSender.setTo(to)
-  				.setBody(text).send();
-			System.out.println("sms id: " + smsId);
+  		String smsId = twilioSmsSender.setTo(to).setBody(text).send();
+		System.out.println("sms id: " + smsId);
 	} catch (TwilioRestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		e.printStackTrace();
 	}
 		
 		
@@ -83,13 +81,12 @@ public void smsSend(String accountSid, String twilioToken, String from, String t
 	try {
   		String smsId = twilioSmsSender
   				.setAccountSid(accountSid)
-					.setAuthToken(twilioToken)
-					.setFrom(from).setTo(to)
-					.setBody(text).send();
-			System.out.println("sms id: " + smsId);
+				.setAuthToken(twilioToken)
+				.setFrom(from).setTo(to)
+				.setBody(text).send();
+		System.out.println("sms id: " + smsId);
 	} catch (TwilioRestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		e.printStackTrace();
 	}
 		
 		
