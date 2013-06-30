@@ -64,8 +64,7 @@ public void directCall(String to, String url) {
   		String callId = twilioCaller.setTo(to).setEndpoint(url).call();
 		System.out.println("call id: " + callId);
 	} catch (TwilioRestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		e.printStackTrace();
 	}
 		
 		
@@ -87,8 +86,7 @@ public void call(String accountSid, String twilioToken, String from, String to, 
 					.setEndpoint(url).call();
 		System.out.println("call id: " + callId);
 	} catch (TwilioRestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		e.printStackTrace();
 	}
 		
 		
