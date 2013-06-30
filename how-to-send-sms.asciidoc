@@ -1,0 +1,99 @@
+== how to send sms from java code
+
+Some code about how to use TwilioSmsSender inside java classes.
+
+Add to your WEB-INF/web.xml, some context params:
+
+----
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>/index.htm</welcome-file>
+	</welcome-file-list>
+
+	<context-param>
+		<param-name>TWILIO_SID</param-name>
+		<param-value>xxxxxxxx</param-value>
+	</context-param>
+
+
+	<context-param>
+		<param-name>TWILIO_TOKEN</param-name>
+		<param-value>xxxxx</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>TWILIO_NUMBER</param-name>
+		<param-value>xxxxx</param-value>
+	</context-param>
+
+</web-app>
+
+----
+
+And inside the class where you want call some number:
+
+- Inject TwilioSmsSender
+----
+
+@Inject
+TwilioSmsSender TwilioSmsSender;
+	
+----
+
+- If you are in the web context (where your app can see the context parameters):
+
+----
+
+public void directSmsSend(String to, String url) {
+
+	try {
+  		String smsId = twilioSmsSender.setTo(to)
+  				.setBody(text).send();
+			System.out.println("sms id: " + smsId);
+	} catch (TwilioRestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+	}
+		
+		
+}
+
+----
+
+- If you are in ejb context (without interactions with web level - like ejb3 timers):
+
+----
+
+public void smsSend(String accountSid, String twilioToken, String from, String to, String text) {
+
+	try {
+  		String smsId = twilioSmsSender
+  				.setAccountSid(accountSid)
+					.setAuthToken(twilioToken)
+					.setFrom(from).setTo(to)
+					.setBody(text).send();
+			System.out.println("sms id: " + smsId);
+	} catch (TwilioRestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+	}
+		
+		
+}
+
+----
+
