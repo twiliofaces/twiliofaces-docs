@@ -1,5 +1,7 @@
+02-07-2013 - *UPDATE on Say verb* - using alice, the latest Twilio voice engine, our  app can speak in 26 dialects. 
 
-== *conference* - http://www.twilio.com/docs/api/twiml/conference
+
+== *conference* - http://www.twilio.com/docs/api/twiml/conference[api conference]
 The Dial verb's Conference noun allows you to connect to a conference room.
 
 sample code:
@@ -58,7 +60,7 @@ sample code:
 |===
 
 
-== *dial* - http://www.twilio.com/docs/api/twiml/dial
+== *dial* - http://www.twilio.com/docs/api/twiml/dial[api dial]
 The Dial verb connects the current caller to another phone.
 
 sample code:
@@ -116,7 +118,7 @@ sample code:
 
 |===
 
-== *enqueue* - http://www.twilio.com/docs/api/twiml/enqueue
+== *enqueue* - http://www.twilio.com/docs/api/twiml/enqueue[api enqueue]
 The Enqueue verb enqueues the current call in a call queue.
 
 sample code:
@@ -159,7 +161,7 @@ sample code:
 
 |===
 
-== *gather* - http://www.twilio.com/docs/api/twiml/gather
+== *gather* - http://www.twilio.com/docs/api/twiml/gather[api gather]
 The Gather verb collects digits that a caller enters into his or her telephone keypad.
 
 sample code:
@@ -202,7 +204,7 @@ sample code:
 
 |===
 
-== *hangup* - http://www.twilio.com/docs/api/twiml/hangup
+== *hangup* - http://www.twilio.com/docs/api/twiml/hangup[api hangup]
 The Hangup verb ends a call.
 
 sample code:
@@ -211,7 +213,7 @@ sample code:
 ----
 
 
-== *jsClient* - http://www.twilio.com/docs/client/twilio-js
+== *jsClient* - http://www.twilio.com/docs/client/twilio-js[api twilio-js]
 Twilio.js allows you to establish audio connections between a web browser and a Twilio Application.
 
 sample code:
@@ -254,7 +256,7 @@ sample code:
 
 |===
 
-== *leave* - http://www.twilio.com/docs/api/twiml/leave
+== *leave* - http://www.twilio.com/docs/api/twiml/leave[api leave]
 The Leave verb transfers control of a call that is in a queue so that the caller exits the queue and execution continues with the next verb after the original Enqueue
 
 sample code:
@@ -262,7 +264,7 @@ sample code:
 <tf:leave />
 ----
 
-== *number* - http://www.twilio.com/docs/api/twiml/number
+== *number* - http://www.twilio.com/docs/api/twiml/number[api number]
 The Dial verb's Number noun specifies a phone number to dial. 
 
 sample code:
@@ -300,7 +302,7 @@ sample code:
 
 |===
 
-== *pause* - http://www.twilio.com/docs/api/twiml/pause
+== *pause* - http://www.twilio.com/docs/api/twiml/pause[api pause]
 The Pause verb waits silently for a specific number of seconds. 
 
 sample code:
@@ -323,7 +325,7 @@ sample code:
 
 |===
 
-== *play* - http://www.twilio.com/docs/api/twiml/play
+== *play* - http://www.twilio.com/docs/api/twiml/play[api play]
 The Play verb plays an audio file back to the caller. Twilio retrieves the file from a URL that you provide.
 
 sample code:
@@ -351,7 +353,7 @@ sample code:
 
 |===
 
-== *queue* - http://www.twilio.com/docs/api/twiml/queue
+== *queue* - http://www.twilio.com/docs/api/twiml/queue[api queue]
 The Dial verb's Queue noun specifies a queue to dial.
 
 sample code:
@@ -384,7 +386,7 @@ sample code:
 
 |===
 
-== *record* - http://www.twilio.com/docs/api/twiml/record
+== *record* - http://www.twilio.com/docs/api/twiml/record[api record]
 The Record verb records the caller's voice and returns to you the URL of a file containing the audio recording.
 
 sample code:
@@ -437,7 +439,7 @@ sample code:
 
 |===
 
-== *redirect* - http://www.twilio.com/docs/api/twiml/redirect
+== *redirect* - http://www.twilio.com/docs/api/twiml/redirect[api redirect]
 The Redirect verb transfers control of a call to the TwiML at a different URL.
 
 sample code:
@@ -465,7 +467,7 @@ sample code:
 
 |===
 
-== *reject* - http://www.twilio.com/docs/api/twiml/reject
+== *reject* - http://www.twilio.com/docs/api/twiml/reject[api reject]
 The Reject verb rejects an incoming call to your Twilio number without billing you.
 
 sample code:
@@ -488,7 +490,7 @@ sample code:
 
 |===
 
-== *response* - http://www.twilio.com/docs/api/twiml/response
+== *response* - http://www.twilio.com/docs/api/twiml/response[api response]
 The root element of Twilio's XML Markup is the Response element.
 
 sample code:
@@ -496,7 +498,7 @@ sample code:
 <tf:response />
 ----
 
-== *say* - http://www.twilio.com/docs/api/twiml/say
+== *say* - http://www.twilio.com/docs/api/twiml/say[api say]
 The Say verb converts text to speech that is read back to the caller. Say is useful for development or saying dynamic text that is difficult to pre-record.
 
 sample code:
@@ -513,12 +515,12 @@ sample code:
 |type
 
 |voice
-|Allowed Values:man, woman. Default Value:man
+|Allowed Values:man, woman, *alice*. Default Value:man
 |false
 |java.lang.String
 
 |language
-|Allowed Values:en, en-gb, es, fr, de, it. Default Value:en
+|Allowed Values - if you use man, woman:en, en-gb, es, fr, de, it. if you use *alice*:da-DK, de-DE, en-AU, en-CA, en-GB, en-IN, en-US, ca-ES, es-ES, es-MX, fi-FI, fr-CA, fr-FR, it-IT, ja-JP, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ru-RU, sv-SE, zh-CN, zh-HK, zh-TW Default Value:en
 |false
 |java.lang.String
 
@@ -534,7 +536,7 @@ sample code:
 
 |===
 
-== *sip* - http://www.twilio.com/docs/api/twiml/say
+== *sip* - http://www.twilio.com/docs/api/twiml/say[api say]
 The Dial verb's Sip noun lets you set up VoIP sessions by using SIP - Session Initiation Protocol.
 
 sample code:
@@ -572,7 +574,7 @@ sample code:
 
 |===
 
-== *sms* - http://www.twilio.com/docs/api/twiml/sms
+== *sms* - http://www.twilio.com/docs/api/twiml/sms[api sms]
 The Sms verb sends an SMS message to a phone number during a phone call.
 
 sample code:
