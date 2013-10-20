@@ -1,4 +1,4 @@
-twilio-sample
+quick start with twiliofaces
 =============
 
 == quick start with twiliofaces
@@ -37,7 +37,7 @@ This is the entry point for your sample twilio app.
 
 *Status Callback URL*
 Twiliofaces automatically adds a particular JSF page, notification.jsf, to the root of your webapp context
-You should register its URL on Twilio (e.g., http://xxx.org/app-name/notification.jsf) as the status callback URL that
+You should register its URL on Twilio (e.g., http://xxx.org/app-name/statusCallback.jsf) as the status callback URL that
 Twilio uses to communicate that a call to your twilio phone number has ended.
 In turn, Twiliofaces uses that jsf page to register the end of call and to consequently destroy the twilioscoped components associated to it.
 
@@ -45,7 +45,7 @@ In turn, Twiliofaces uses that jsf page to register the end of call and to conse
 
 To use twiliofaces you need to declare some dependencies:
 
-. twilio sdk
+. twiliofaces (that import like dependence twilio sdk)
 . javaee-api
 
 Below a minimal pom.xml:
@@ -61,19 +61,11 @@ Below a minimal pom.xml:
 	<packaging>war</packaging>
 
 	<dependencies>
-		<!-- twilio sdk -->
-		<dependency>
-			<groupId>com.twilio.sdk</groupId>
-			<artifactId>twilio-java-sdk</artifactId>
-			<version>3.3.10</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<!-- twilio faces -->
+		<!-- twiliofaces -->
 		<dependency>
 			<groupId>org.twiliofaces</groupId>
 			<artifactId>twiliofaces</artifactId>
-			<version>1.2.4-SNAPSHOT</version>
+			<version>1.2.4</version>
 			<scope>compile</scope>
 		</dependency>
 		<!-- java ee api -->
@@ -92,7 +84,7 @@ Twiliofaces provides a CDI extension to use @TwilioScope, a custom scope meant t
 identified with a CallSid parameter. Furtherore, Twiliofaces also provides several producers of twilio-related parameters
 to simplify their injection in the CDI components of your webapp.
 
-Below a minimal web.xml, to map twilio secret parameters that the application needs to exchange with Twilio to confirm its authenticity
+Below a minimal accounts.properties, to map twilio secret parameters that the application needs to exchange with Twilio to confirm its authenticity
 
 . TWILIO SID
 . TWILIO TOKEN
@@ -101,30 +93,22 @@ Below a minimal web.xml, to map twilio secret parameters that the application ne
 
 ----
 
+twilio.accounts=default
+account.default.twilioSid=1111
+account.default.twilioToken=222
+account.default.twilioNumber=333
+account.default.applicationSid=444
+
+----
+
+In the past, we used web.xml to do that (with context parameters), today this way is deprecated! And the web.xml is almost empty:
+
+----
+
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-
-	<context-param>
-		<param-name>TWILIO_SID</param-name>
-		<param-value>XXXX</param-value>
-	</context-param>
-
-
-	<context-param>
-		<param-name>TWILIO_TOKEN</param-name>
-		<param-value>XXXX</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>TWILIO_NUMBER</param-name>
-		<param-value>XXXX</param-value>
-	</context-param>
-	<context-param>
-		<param-name>APPLICATION_SID</param-name>
-		<param-value>XXXX</param-value>
-	</context-param>
 
 </web-app>
 
@@ -173,13 +157,19 @@ In both cases, you must always remember that:
 its resolution will only happen at time of instantiation of the injecting component (causing references to 
 expired values!)
 Therefore:
-- to @Inject request parameters in CDI components of otehr scopes than the @RequestScope one, you always have to
+- to @Inject request parameters in CDI components of other scopes than the @RequestScope one, you always have to
 inject "instances" of those parameters (as follows) and obtain references to the actual values via the 
 instance get() method:
 ----
-@Inject @From Instance<String> from;
+
+@Inject 
+@From Instance<String> from;
+
 ...
-public void doSomething() { System.out.println("from = " + from.get()); }
+public void doSomething() {
+	 System.out.println("from = " + from.get()); 
+}
+
 ----
 
 === LogController
@@ -207,9 +197,9 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.twiliofaces.annotations.TwilioRequestParams;
-import org.twiliofaces.api.event.TwimlEvent;
-import org.twiliofaces.request.pojo.TwilioRequestMap;
+import rg.twiliofaces.inject.notification.TwilioRequestParams;
+import org.twiliofaces.cdi.event.TwimlEvent;
+import org.twiliofaces.cdi.producer.util.TwilioRequestMap;
 
 @Named
 @RequestScoped
@@ -267,11 +257,11 @@ import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.twiliofaces.annotations.notification.CallSid;
-import org.twiliofaces.annotations.notification.Digits;
-import org.twiliofaces.annotations.notification.From;
-import org.twiliofaces.annotations.notification.RecordingUrl;
-import org.twiliofaces.annotations.scope.TwilioScope;
+import org.twiliofaces.inject.notification.CallSid;
+import org.twiliofaces.inject.notification.Digits;
+import org.twiliofaces.inject.notification.From;
+import org.twiliofaces.inject.notification.RecordingUrl;
+import org.twiliofaces.inject.context.TwilioScope;
 import org.twiliofaces.test.sample.model.Caller;
 
 @TwilioScope
@@ -435,7 +425,7 @@ the first.xhtml code:
 	xmlns:tf="http://twiliofaces.org/twiliofaces">
 	<f:event type="preRenderView" listener="#{quizController.first}" />
 	<tf:response>
-		<tf:say value="#{quizController.intro}" voice="woman" language="en" />
+		<tf:say value="#{quizController.intro}" voice="alice" language="en" />
 		<tf:record action="second.twiml" method="POST" maxLength="8" />
 		<tf:say value="#{quizController.hangoutMessage}" />
 	</tf:response>
@@ -456,7 +446,7 @@ the second.twmil code:
 	<f:event type="preRenderView" listener="#{quizController.second}" />
 	<tf:response>
 		<tf:gather action="third.twiml" method="POST" numDigits="1">
-			<tf:say value="#{quizController.question}" voice="woman"
+			<tf:say value="#{quizController.question}" voice="alice"
 				language="en" />
 		</tf:gather>
 	</tf:response>
@@ -479,7 +469,7 @@ the third.twiml code:
 		<tf:say value="Dear" voice="woman" language="en" />
 		<tf:play value="#{quizController.caller.recordingUrl}" />
 		<tf:say value="This is the Quiz Result: #{quizController.result}"
-			voice="woman" language="en" />
+			voice="alice" language="en" />
 	</tf:response>
 </f:view>
 
