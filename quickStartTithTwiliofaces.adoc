@@ -1,6 +1,3 @@
-quick-start-with-twiliofaces
-=============
-
 == quick start with twiliofaces
 
 . what will you know after reading this tutorial:
