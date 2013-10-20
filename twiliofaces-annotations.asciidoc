@@ -9,11 +9,30 @@ You can inject, in your CDI bean, a twilio request param  using the correspondin
 
 @Named
 @RequestScoped
-public SimpleController {
+public SimpleRequestController {
 
-@Inject
-@ApiVersion
-String apiVersion
+   @Inject
+   @CallSid
+   private String callSid;
+   
+   
+----
+
+If you inject some parameter in a session scoped component, you should use Instance<String> to read the valued, 
+otherwise you will read always the value injected at creation of controller. With Instance<String> you will 
+read the contextual value.
+
+----
+   
+@Named
+@SessionScoped
+public SimpleSessionController implements Serializable{
+   
+   
+   @Inject
+   @From
+   private Instance<String> from;
+  
 
 ....
 
@@ -25,58 +44,59 @@ For more information about single param, read:
 http://www.twilio.com/docs/api/twiml/twilio_request
 
 
-== configuration annotations
+== configuration annotations (org.twiliofaces.inject.configuration)
 
-. ApiVersion
-. ApplicationSid	
-. TwilioClientToken	
-. TwilioNumber		
-. TwilioSid		
-. TwilioToken
+. TwilioAccount
+. TwilioAccountSid
+. TwilioAuthToken
+. TwilioCapabilityToken
+. TwilioConnectAppSid
+. TwilioNumber
 
 
-== notification annotations
+== notification annotations (org.twiliofaces.inject.notification)
 		
-. AccountSid		
-. CallSid		
-. CallStatus		
-. CallerName		
-. Digits		
-. Direction		
-. ForwardedFrom		
-. From		
-. FromCity		
-. FromCountry		
-. FromState		
-. FromZip		
-. RecordingDuration		
-. RecordingSid		
-. RecordingUrl		
-. SmsStatus		
-. To		
-. ToCity		
-. ToCountry		
-. ToState		
-. ToZip		
-. TranscriptionSid		
-. TranscriptionStatus		
-. TranscriptionText		
-. TranscriptionUrl		
+. AccountSid
+. ApiVersion
+. Caller
+. CallerName
+. CallSid
+. CallStatus
+. Digits
+. Direction
+. ForwardedFrom
+. From
+. FromCity
+. FromCountry
+. FromState
+. FromZip
+. PhoneNumber
+. RecordingDuration
+. RecordingSid
+. RecordingUrl
+. SmsStatus
+. To
+. ToCity
+. ToCountry
+. ToState
+. ToZip
+. TranscriptionSid
+. TranscriptionStatus
+. TranscriptionText
+. TranscriptionUrl
+. TwilioRequestParams (all request params annotation)
 . TwilioSignature
 
-== twilio scope annotation
+== twilio scope annotation (org.twiliofaces.inject.context)
 
 . TwilioScope
 
-== sip annotations
+== sip annotations (org.twiliofaces.inject.notification.sip)
 
-. DialSipCallId		
-. DialSipHeader		
-. DialSipHeader_		
-. DialSipResponseCode		
-. SipCallId		
+. DialSipCallId
+. DialSipHeader_
+. DialSipHeader
+. DialSipResponseCode
+. SipCallId
 . SipHeader
 
-== all request params annotation 
-
-. TwilioRequestParams
