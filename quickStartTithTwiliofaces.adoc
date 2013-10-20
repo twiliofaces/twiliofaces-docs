@@ -147,7 +147,7 @@ For example:
 As an alternative, we can inject one comprehensive map, that collects all these parameters: 
 - @TwilioRequestMap 
 
-For a complete list go to http://www.twiliofaces.org/howto.html#injectParameters.
+For a complete list go to http://www.twiliofaces.org/p/quickies/all-injectable-request-params.
 
 In both cases, you must always remember that:
 - if you @Inject a request parameter in a controller whose life-cycle is longer than the request itself, 
