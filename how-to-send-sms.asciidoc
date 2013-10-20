@@ -2,45 +2,20 @@
 
 Some code about how to use TwilioSmsSender inside java classes.
 
-Add to your WEB-INF/web.xml, some context params:
+Add a accounts.properties in the classpath of the application - WEB-INF/classes path:
 
 ----
-
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-	<servlet>
-		<servlet-name>Faces Servlet</servlet-name>
-		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.jsf</url-pattern>
-	</servlet-mapping>
-
-	<welcome-file-list>
-		<welcome-file>/index.htm</welcome-file>
-	</welcome-file-list>
-
-	<context-param>
-		<param-name>TWILIO_SID</param-name>
-		<param-value>xxxxxxxx</param-value>
-	</context-param>
-
-
-	<context-param>
-		<param-name>TWILIO_TOKEN</param-name>
-		<param-value>xxxxx</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>TWILIO_NUMBER</param-name>
-		<param-value>xxxxx</param-value>
-	</context-param>
-
-</web-app>
+twilio.accounts=default,primo
+# default account
+account.default.twilioSid=1111
+account.default.twilioToken=222
+account.default.twilioNumber=333
+account.default.applicationSid=444
+#primo account
+account.primo.twilioSid=5555
+account.primo.twilioToken=666
+account.primo.twilioNumber=777
+account.primo.applicationSid=888
 
 ----
 
@@ -50,7 +25,12 @@ And inside the class where you want call some number:
 ----
 
 @Inject
-TwilioSmsSender TwilioSmsSender;
+@TwilioAccount(accountName = "default")
+Sender sender1;
+
+@Inject
+@TwilioAccount(accountName = "primo")
+Sender sender2;
 	
 ----
 
@@ -58,11 +38,13 @@ TwilioSmsSender TwilioSmsSender;
 
 ----
 
-public void directSmsSend(String to, String url) {
+public void directSmsSend(String to, String body) {
 
 	try {
-  		String smsId = twilioSmsSender.setTo(to).setBody(text).send();
-		System.out.println("sms id: " + smsId);
+  		String sid1 = sender1.setTo(to).setBody(body).send();
+		System.out.println("sms id: " + sid1);
+		String sid2 = sender2.setTo(to).setBody(body).send();
+		System.out.println("sms id: " + sid2);
 	} catch (TwilioRestException e) {
 		e.printStackTrace();
 	}
@@ -72,19 +54,17 @@ public void directSmsSend(String to, String url) {
 
 ----
 
-- If you are in ejb context (without interactions with web level - like ejb3 timers):
+- If you want use runtime parameters to generate a sender:
 
 ----
 
 public void smsSend(String accountSid, String twilioToken, String from, String to, String text) {
 
 	try {
-  		String smsId = twilioSmsSender
-  				.setAccountSid(accountSid)
-				.setAuthToken(twilioToken)
-				.setFrom(from).setTo(to)
-				.setBody(text).send();
-		System.out.println("sms id: " + smsId);
+  		String sid = new SimpleSender().from("+14158141829").to("+15558675309")
+			.body("Jenny please?! I love you <3")
+               		.media("http://www.example.com/hearts.png").send();
+		System.out.println("sms id: " + sid);
 	} catch (TwilioRestException e) {
 		e.printStackTrace();
 	}
