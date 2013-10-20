@@ -1,0 +1,66 @@
+Below a file accounts.properties with two account inside, to map twilio secret parameters that the application needs to exchange with Twilio to confirm its authenticity
+
+. TWILIO SID
+. TWILIO TOKEN
+. TWILIO NUMBER
+. TWILIO APPLICATION SID
+
+----
+
+twilio.accounts=default,primo
+# default account
+account.default.twilioSid=1111
+account.default.twilioToken=222
+account.default.twilioNumber=333
+account.default.applicationSid=444
+#due account
+account.primo.twilioSid=5555
+account.primo.twilioToken=666
+account.primo.twilioNumber=777
+account.primo.applicationSid=888
+
+----
+
+When you inject some twiliofaces doers (like Caller, Sender), you should declare the account name inside the annotation @TwilioAccount(accountName = "primo"):
+
+----
+
+@Inject
+@TwilioAccount(accountName = "primo")
+Caller caller;
+
+----
+
+If you inject some twiliofaces doers only unsing @TwilioAccount or without qualifier :
+
+----
+
+@Inject
+@TwilioAccount
+Caller caller;
+
+----
+
+or:
+
+----
+@Inject
+Caller caller;
+
+----
+
+The caontainer will inject you the default account.
+
+If you have a dynamic association between the account to use and some java controller, you can resolve the account name with:
+
+----
+
+@Inject
+@TwilioAccount(accountName = "#{user.inSession()}")
+Caller caller;
+
+
+----
+
+
+
