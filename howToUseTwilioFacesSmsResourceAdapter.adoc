@@ -1,5 +1,4 @@
 
-
 Twiliofaces sms resource adapter is a JMS resource adapter, witch enable your application to receive twilio sms using a message driven bean. 
 
 Simple instructions to use:
@@ -7,7 +6,7 @@ Simple instructions to use:
 - add twiliofaces-sms-ra.xxx.rar to your jboss-as-7.x/standalone/deployments
 - create a new web app, with twiliofaces, org.jboss.netty... dependencies:
 
-`
+----
 
     <?xml version="1.0" encoding="UTF-8"?>
     <jboss-deployment-structure>
@@ -17,11 +16,13 @@ Simple instructions to use:
     		</dependencies>
     	</deployment>
      </jboss-deployment-structure>
-`
+     
+----
 
 - in the WEB-INF/web.xml add http tunnel servlet:
 
-`
+----
+
     <servlet>
 		<servlet-name>NettyTunnelingServlet</servlet-name>
 		<servlet-class>org.jboss.netty.channel.socket.http.HttpTunnelingServlet</servlet-class>
@@ -36,12 +37,13 @@ Simple instructions to use:
 		<servlet-name>NettyTunnelingServlet</servlet-name>
 		<url-pattern>/tunnel</url-pattern>
 	</servlet-mapping>
-	`
+
+----
 	
 - create a mdb wich use twiliofaces-sms-ra adapter:
 
 
-`
+----
 
     import java.util.Enumeration;
     
@@ -83,5 +85,6 @@ Simple instructions to use:
 
     }
 }
-`
+
+----
 
