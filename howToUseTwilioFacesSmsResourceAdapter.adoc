@@ -1,4 +1,3 @@
-howToUseTwilioFacesSmsResourceAdapter.adoc
 
 
 Twiliofaces sms resource adapter is a JMS resource adapter, witch enable your application to receive twilio sms using a message driven bean. 
