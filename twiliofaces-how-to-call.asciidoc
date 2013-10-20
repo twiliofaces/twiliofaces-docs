@@ -31,11 +31,11 @@ Caller caller;
 	
 
 
-public void directCall(String to, String url) {
+public void directCall(String to, String endpointUrl) {
 
 	try {
   		String callId = caller
-  		.endpoint("http://demo.twilio.com/docs/voice.xml").to("+14155551212").call();
+  		.endpoint(endpointUrl).to(to).call();
 		System.out.println("call id: " + callId);
 	} catch (TwilioRestException e) {
 		e.printStackTrace();
