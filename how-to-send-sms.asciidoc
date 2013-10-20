@@ -36,8 +36,11 @@ Sender sender2;
 public void directSmsSend(String to, String body) {
 
 	try {
+		// from the default account number
   		String sid1 = sender1.setTo(to).setBody(body).send();
 		System.out.println("sms id: " + sid1);
+		
+		// from the primo account number
 		String sid2 = sender2.setTo(to).setBody(body).send();
 		System.out.println("sms id: " + sid2);
 	} catch (TwilioRestException e) {
@@ -53,14 +56,14 @@ public void directSmsSend(String to, String body) {
 
 ----
 
-public void smsSend(String accountSid, String twilioToken, String from, String to, String text) {
+public void smsSend(String accountSid, String authToken, String from, String to, String text, String mediaLink) {
 
 	try {
   		String sid = new SimpleSender()
-  				.accountSid("xxxx").authToken("xxxx")
-  				.from("+14158141829").to("+15558675309")
-               			.body("Jenny please?! I love you!!")
-               			.media("http://www.example.com/hearts.png")
+  				.accountSid(accountSid).authToken(authToken)
+  				.from(from).to(to)
+               			.body(text)
+               			.media(mediaLink)
                			.send();
 		System.out.println("sms id: " + sid);
 	} catch (TwilioRestException e) {
