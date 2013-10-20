@@ -1,6 +1,6 @@
 == how to send sms from java code
 
-Some code about how to use TwilioSmsSender inside java classes.
+Some code about how to use twiliofaces doer *Sender* inside java classes.
 
 Add a accounts.properties in the classpath of the application - WEB-INF/classes path:
 
@@ -21,7 +21,7 @@ account.primo.applicationSid=888
 
 And inside the class where you want call some number:
 
-- Inject TwilioSmsSender
+- Inject org.twiliofaces.cdi.doers.Sender (if you don't specify the account name using the @TwilioAccount annotation, the container will inject the default account)
 ----
 
 @Inject
@@ -32,11 +32,6 @@ Sender sender1;
 @TwilioAccount(accountName = "primo")
 Sender sender2;
 	
-----
-
-- If you are in the web context (where your app can see the context parameters):
-
-----
 
 public void directSmsSend(String to, String body) {
 
@@ -54,16 +49,19 @@ public void directSmsSend(String to, String body) {
 
 ----
 
-- If you want use runtime parameters to generate a sender:
+- you can create your runtime org.twiliofaces.cdi.doers.simple.SimpleSender using:
 
 ----
 
 public void smsSend(String accountSid, String twilioToken, String from, String to, String text) {
 
 	try {
-  		String sid = new SimpleSender().from("+14158141829").to("+15558675309")
-			.body("Jenny please?! I love you <3")
-               		.media("http://www.example.com/hearts.png").send();
+  		String sid = new SimpleSender()
+  				.accountSid("xxxx").authToken("xxxx")
+  				.from("+14158141829").to("+15558675309")
+               			.body("Jenny please?! I love you!!")
+               			.media("http://www.example.com/hearts.png")
+               			.send();
 		System.out.println("sms id: " + sid);
 	} catch (TwilioRestException e) {
 		e.printStackTrace();
